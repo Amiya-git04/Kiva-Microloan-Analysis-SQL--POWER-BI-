@@ -1,9 +1,10 @@
-Kiva Microloan Analysis: SQL Queries 
+# Kiva Microloan Analysis: SQL Queries 
 
 This document provides SQL queries and their conceptual results, demonstrating analysis performed solely on the kiva_loans_utf8 table. These are suitable for documentation and GitHub.
 
 
 1. Describe the process of ingesting raw Kiva loan data into MS SQL Server and outlining its initial schema
+   
 SELECT
     COLUMN_NAME,
     DATA_TYPE,
@@ -18,6 +19,7 @@ ORDER BY
 
 
 2. How did you perform initial data exploration in SQL to understand the distribution and basic structure of the Kiva dataset?
+   
 --Top 100 rows to see data structure
 SELECT TOP 100 *
 FROM kiva_loans_utf8;
@@ -31,6 +33,7 @@ FROM kiva_loans_utf8;
 
 
 3. Explain how you handled and formatted DATE and DATETIME columns directly within SQL Server.
+   
 SELECT
     posted_time,
     CAST(posted_time AS DATE) AS PostedDateOnly,
@@ -43,6 +46,7 @@ LIMIT 5; -- Using LIMIT for sample, use TOP in SQL Server
 
 
 4. What SQL queries did you use to identify and manage missing values in crucial Kiva columns?
+   
 -- Identify missing values:
 SELECT COUNT(*) AS MissingFundedAmount
 FROM kiva_loans_utf8
@@ -52,12 +56,9 @@ SELECT COUNT(*) AS MissingBorrowerGenders
 FROM kiva_loans_utf8
 WHERE borrower_genders IS NULL OR borrower_genders = '';
 
--- Example of managing (imputing 'Unknown' for missing genders) - use with caution (UPDATE statement):
--- UPDATE kiva_loans_utf8
--- SET borrower_genders = 'Unknown'
--- WHERE borrower_genders IS NULL OR borrower_genders = '';
 
 5. How did you detect and de-duplicate records within the Kiva dataset?
+   
 WITH CTE_LoanDuplicates AS (
     SELECT
         *,
@@ -71,13 +72,7 @@ WHERE rn > 1; -- Shows duplicate rows based on 'id'
 
 
 6. Provide examples of data type conversions you performed in SQL.
--- Example: Converting a potentially string 'loan_amount' to decimal (if it was imported as text)
--- SELECT
---    CAST(loan_amount AS DECIMAL(18, 2)) AS LoanAmountDecimal
--- FROM kiva_loans_utf8
--- WHERE ISNUMERIC(loan_amount) = 1;
-
--- Example: Ensuring 'term_in_months' is an integer
+   
 SELECT
     term_in_months,
     CAST(term_in_months AS INT) AS TermAsInteger
@@ -87,7 +82,7 @@ LIMIT 5;
 
 
 7. Describe how you might standardize text fields (e.g., country names) or apply basic normalization using SQL.
--- Example: Standardizing casing for sector (e.g., ensuring all are uppercase)
+
 -- UPDATE kiva_loans_utf8
 -- SET sector = UPPER(sector);
 
@@ -101,11 +96,13 @@ SELECT DISTINCT country FROM kiva_loans_utf8 ORDER BY country;
 
 
 8. Write a SQL query to calculate the total number of loans in the dataset.
+   
 SELECT COUNT(id) AS TotalLoans
 FROM kiva_loans_utf8;
 
 
 9. Calculate the total loan_amount and funded_amount across all Kiva loans.
+    
 SELECT
     SUM(loan_amount) AS TotalLoanAmount,
     SUM(funded_amount) AS TotalFundedAmount
@@ -114,6 +111,7 @@ FROM kiva_loans_utf8;
 
 
 10. Determine the overall percentage of fully funded loans.
+    
 SELECT
     CAST(SUM(CASE WHEN loan_amount = funded_amount THEN 1 ELSE 0 END) AS DECIMAL(10, 2)) * 100.0 / COUNT(*) AS FullyFundedPercentage
 FROM kiva_loans_utf8
@@ -122,6 +120,7 @@ WHERE loan_amount IS NOT NULL AND funded_amount IS NOT NULL;
 
 
 11. Calculate the total unfunded amount (loan_amount - funded_amount).
+    
 SELECT
     SUM(loan_amount - funded_amount) AS TotalUnfundedAmount
 FROM kiva_loans_utf8
@@ -129,6 +128,7 @@ WHERE loan_amount > funded_amount; -- Only for partially or unfunded loans (if a
 
 
 12. Find the average time_to_fund_days for all loans.
+    
 SELECT
     AVG(CAST(DATEDIFF(day, posted_time, funded_time) AS DECIMAL(10, 2))) AS AverageTimeToFundDays
 FROM kiva_loans_utf8
@@ -136,6 +136,7 @@ WHERE posted_time IS NOT NULL AND funded_time IS NOT NULL;
 
 
 13. Identify the top 10 countrys by the highest number of Kiva loans.
+
 SELECT TOP 10
     country,
     COUNT(id) AS NumberOfLoans
@@ -147,6 +148,7 @@ ORDER BY NumberOfLoans DESC;
 
 
 14. Determine which countrys receive the largest total loan_amount.
+
 SELECT TOP 10
     country,
     SUM(loan_amount) AS TotalLoanAmountByCountry
@@ -157,6 +159,7 @@ ORDER BY TotalLoanAmountByCountry DESC;
 
 
 15. How would you use SQL to compare funded_amount versus loan_amount by country?
+
 SELECT
     country,
     SUM(loan_amount) AS TotalLoanAmount,
@@ -169,6 +172,7 @@ ORDER BY FundingPercentage DESC;
 
 
 16. Identify the top 10 sectors by total loan_amount and lender_count.
+
 SELECT TOP 10
     sector,
     SUM(loan_amount) AS TotalLoanAmountBySector,
@@ -180,6 +184,7 @@ ORDER BY TotalLoanAmountBySector DESC, TotalLenderCountBySector DESC;
 
 
 17. Calculate the average loan_amount across different activity types.
+
 SELECT
     activity,
     AVG(loan_amount) AS AverageLoanAmountByActivity
@@ -189,8 +194,8 @@ GROUP BY activity
 ORDER BY AverageLoanAmountByActivity DESC;
 
 
-
 18. Determine which sectors have the highest and lowest funding success rates.
+
 SELECT
     sector,
     CAST(SUM(CASE WHEN loan_amount = funded_amount THEN 1 ELSE 0 END) AS DECIMAL(10, 2)) * 100.0 / COUNT(*) AS SectorFundingSuccessPercentage
@@ -202,6 +207,7 @@ ORDER BY SectorFundingSuccessPercentage DESC;
 
 
 19. Calculate the average term_in_months per sector.
+
 SELECT
     sector,
     AVG(term_in_months) AS AverageTermInMonthsBySector
@@ -212,6 +218,7 @@ ORDER BY AverageTermInMonthsBySector DESC;
 
 
 20. Find the distribution of borrower_genders in the Kiva dataset.
+
 SELECT
     borrower_genders,
     COUNT(*) AS NumberOfLoans,
@@ -223,6 +230,7 @@ ORDER BY NumberOfLoans DESC;
 
 
 21. How do loan_amounts differ for female borrowers compared to other gender groups, analyzed in SQL?
+
 SELECT
     borrower_genders,
     AVG(loan_amount) AS AverageLoanAmount
@@ -233,6 +241,7 @@ ORDER BY AverageLoanAmount DESC;
 
 
 22. Identify the partner_ids that facilitate the most loans or largest loan_amount.
+
 SELECT TOP 10
     partner_id,
     COUNT(id) AS NumberOfLoans,
@@ -244,6 +253,7 @@ ORDER BY NumberOfLoans DESC, TotalLoanAmount DESC;
 
 
 23. Calculate the average lender_count for each loan_amount_bucket.
+
 SELECT
     CASE
         WHEN loan_amount < 500 THEN 'Under $500'
@@ -265,6 +275,7 @@ ORDER BY MIN(loan_amount); -- Order by min amount in bucket for logical sorting
 
 
 24. What SQL query would you use to find the overall proportion of each repayment_interval type?
+
 SELECT
     repayment_interval,
     COUNT(*) AS NumberOfLoans,
@@ -276,6 +287,7 @@ ORDER BY NumberOfLoans DESC;
 
 
 25. Describe how you might use a Common Table Expression (CTE) or subquery in SQL to analyze loans from the top 5 lending countries.
+
 WITH Top5Countries AS (
     SELECT TOP 5
         country
@@ -297,6 +309,7 @@ ORDER BY NumberOfLoansInTop5 DESC;
 
 
 26. How did you use SQL to analyze temporal trends in loan volume (e.g., posted_time or funded_time) month-over-month or year-over-year?
+
 SELECT
     FORMAT(posted_time, 'yyyy-MM') AS PostedMonthYear,
     COUNT(id) AS NumberOfLoans,
@@ -309,6 +322,7 @@ ORDER BY PostedMonthYear;
 
 
 27. Calculate the average difference between funded_time and disbursed_time in days for Kiva loans.
+
 SELECT
     AVG(CAST(DATEDIFF(day, funded_time, disbursed_time) AS DECIMAL(10,2))) AS AverageFundingToDisbursalDays
 FROM kiva_loans_utf8
@@ -317,7 +331,7 @@ AND DATEDIFF(day, funded_time, disbursed_time) >= 0; -- Ensure positive differen
 
 
 28. What SQL queries did you employ to derive insights from the tags column, if raw tags required parsing?
--- Example: Find loans with a specific tag (assuming tags are comma-separated)
+
 SELECT
     id,
     loan_amount,
@@ -326,7 +340,6 @@ SELECT
 FROM kiva_loans_utf8
 WHERE tags LIKE '%#Eco-friendly%'; -- Using LIKE for partial match
 
--- Example: Count loans per common tag (simplified for primary tags)
 -- This query counts loans based on the presence of a few common tags.
 SELECT
     CASE
