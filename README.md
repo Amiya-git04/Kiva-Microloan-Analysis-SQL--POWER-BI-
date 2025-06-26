@@ -20,7 +20,6 @@ Robust SQL Data Engineering (kiva_loans_sql_queries_results.md):
 
  Performance Optimization: Applied indexing strategies to ensure efficient query execution on large datasets.
 
-# Interactive Power BI Dashboard (Visualized Below & Kiva_Microloan_Analysis_Dashboard.pbix):
 
 # Dashboard Visualizations: 
 Key insights from the Power BI dashboard are presented directly within this README via high-quality screenshots, offering an immediate overview of the analytical output.
@@ -42,6 +41,10 @@ Intuitive UX: Incorporated interactive slicers for dynamic filtering by Year, Co
 # Comprehensive Project Presentation (Kiva_Case_Study_Presentation.pptx):
 
 A detailed PowerPoint presentation outlining the project objectives, SQL methodology, Power BI dashboard features, key insights, challenges faced, and actionable recommendations.
+
+Presentation Link :
+
+[(Kiva_Case_Study_Presentation.pptx)](https://github.com/git04/Kiva-Microloan-Analysis-SQL--POWER-BI/blob/main/Kiva_Case_Study_Presentation.pptx)
 
 # Key Insights & Findings
 The analysis revealed compelling insights into Kiva's operations:
@@ -89,6 +92,4 @@ Dashboard Visualizations
 
 
 
-# Presentation Link :
 
-[(Kiva_Case_Study_Presentation.pptx)](https://github.com/git04/Kiva-Microloan-Analysis-SQL--POWER-BI/blob/main/Kiva_Case_Study_Presentation.pptx)
