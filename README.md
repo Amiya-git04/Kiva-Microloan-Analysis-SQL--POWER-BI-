@@ -70,22 +70,22 @@ Dashboard Visualizations
 (This is where you will add your dashboard screenshots. Replace the placeholder lines below with actual image Markdown for each screenshot.)
 
 1. Kiva Global Impact Analysis (Overview)
-![Kiva Global Impact Analysis Overview](images/D1_Overview.png)
+![Kiva Global Impact Analysis Overview Dashboard](D1_Overview.png)
 
 2. Geographical Impact
-![Kiva Global Impact Analysis Overview](images/D3_Geographical.png)
+![Kiva Geographical Impact Dashboard](D3_Geographical.png)
 
 
 3. Borrower & Gender Insights
-![Kiva Global Impact Analysis Overview](images/D2_BorrowerGender.png)
+![Kiva Borrower and Gender Insights Dashboard](D2_BorrowerGender.png)
 
 
 4. Loan Purpose & Sector Analysis
-![Kiva Global Impact Analysis Overview](images/D4_SectorPurpose.png)
+![Kiva Loan Purpose and Sector Analysis Dashboard](D4_SectorPurpose.png)
 
 
 5. Lending Dynamics & Repayment Patterns
-![Kiva Global Impact Analysis Overview](images/D5_LendingDynamics.png)
+![Kiva Lending Dynamics and Repayment Patterns Dashboard](D5_LendingDynamics.png)
 
 
 
