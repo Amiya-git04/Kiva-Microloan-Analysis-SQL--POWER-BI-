@@ -44,7 +44,7 @@ A detailed PowerPoint presentation outlining the project objectives, SQL methodo
 
 Presentation Link :
 
-[(Kiva_Case_Study_Presentation.pptx)](https://github.com/git04/Kiva-Microloan-Analysis-SQL--POWER-BI/blob/main/Kiva_Case_Study_Presentation.pptx)
+[(Kiva_Case_Study_Presentation.pptx)](https://github.com/Amiya-git04/Kiva-Microloan-Analysis-SQL--POWER-BI-/blob/main/Kiva_Case_Study_Presentation.pptx)
 
 # Key Insights & Findings
 The analysis revealed compelling insights into Kiva's operations:
