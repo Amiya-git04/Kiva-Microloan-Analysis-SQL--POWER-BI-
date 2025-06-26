@@ -70,7 +70,6 @@ Power Query (M-Code): ETL Processes within Power BI.
 
 
 Dashboard Visualizations
-(This is where you will add your dashboard screenshots. Replace the placeholder lines below with actual image Markdown for each screenshot.)
 
 1. Kiva Global Impact Analysis (Overview)
 ![Kiva Global Impact Analysis Overview Dashboard](D1_Overview.png)
