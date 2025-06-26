@@ -89,7 +89,6 @@ Dashboard Visualizations
 
 
 
-Presentation
-Access the full project presentation slides here:
+# Presentation Link :
 
-[Link to your PPT Presentation (e.g., Google Slides, OneDrive, or directly in GitHub if it's small enough)]
+[(Kiva_Case_Study_Presentation.pptx)](https://github.com/git04/Kiva-Microloan-Analysis-SQL--POWER-BI/blob/main/Kiva_Case_Study_Presentation.pptx)
